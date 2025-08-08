@@ -1,7 +1,8 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+// import TheWelcome from './components/TheWelcome.vue'
 import MyName from './components/MyName.vue'
+import JSON from './components/JSON.vue'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import MyName from './components/MyName.vue'
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
       <MyName />
+      <JSON />
     </div>
   </header>
 
