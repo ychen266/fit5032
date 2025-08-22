@@ -52,7 +52,16 @@
       </div>
     </div>
   </div>
-
+  <div class="row mt-5">
+    <h4>This is a Primevue Datatable.</h4>
+    <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
+      <Column field="username" header="Username"></Column>
+      <Column field="password" header="Password"></Column>
+      <Column field="isAustralian" header="Australian Resident"></Column>
+      <Column field="gender" header="Gender"></Column>
+      <Column field="reason" header="Reason"></Column>
+    </DataTable>
+  </div>
   
   <div class="row mt-5" v-if="submittedCards.length">
     <div class="d-flex flex-wrap justify-content-start">
@@ -73,7 +82,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 
 const formData = ref({
   username: '',
@@ -81,18 +92,18 @@ const formData = ref({
   isAustralian: false,
   reason: '',
   gender: ''
-});
+})
 
-const submittedCards = ref([]);
+const submittedCards = ref([])
 
 const submitForm = () => {
-  validateName(true);
+  validateName(true)
   validatePassword(true)
   if (!errors.value.username && !errors.value.password) {
-    submittedCards.value.push({ ...formData.value });
-    clearForm();
+    submittedCards.value.push({ ...formData.value })
+    clearForm()
   }
-};
+}
 
 const clearForm = () => {
   formData.value = {
@@ -101,47 +112,47 @@ const clearForm = () => {
     isAustralian: false,
     reason: '',
     gender: ''
-  };
-};
+  }
+}
 
 const errors = ref({
   username: null,
   password: null,
   resident: null,
   gender: null,
-  reason: null,
-});
+  reason: null
+})
 
 const validateName = (blur) => {
   if (formData.value.username.length < 3) {
-    if (blur) errors.value.username = "Name must be at least 3 characters";
+    if (blur) errors.value.username = 'Name must be at least 3 characters'
   } else {
-    errors.value.username = null;
+    errors.value.username = null
   }
-};
+}
 
 const validatePassword = (blur) => {
-  const password = formData.value.password;
-  const minLength = 8;
-  const hasUppercase = /[A-Z]/.test(password);
-  const hasLowercase = /[a-z]/.test(password);
-  const hasNumber = /\d/.test(password);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  const password = formData.value.password
+  const minLength = 8
+  const hasUppercase = /[A-Z]/.test(password)
+  const hasLowercase = /[a-z]/.test(password)
+  const hasNumber = /\d/.test(password)
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password)
 
   if (password.length < minLength) {
-    if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`;
+    if (blur) errors.value.password = `Password must be at least ${minLength} characters long.`
   } else if (!hasUppercase) {
-    if (blur) errors.value.password = "Password must contain at least one uppercase letter.";
+    if (blur) errors.value.password = 'Password must contain at least one uppercase letter.'
   } else if (!hasLowercase) {
-    if (blur) errors.value.password = "Password must contain at least one lowercase letter.";
+    if (blur) errors.value.password = 'Password must contain at least one lowercase letter.'
   } else if (!hasNumber) {
-    if (blur) errors.value.password = "Password must contain at least one number.";
+    if (blur) errors.value.password = 'Password must contain at least one number.'
   } else if (!hasSpecialChar) {
-    if (blur) errors.value.password = "Password must contain at least one special character.";
+    if (blur) errors.value.password = 'Password must contain at least one special character.'
   } else {
-    errors.value.password = null;
+    errors.value.password = null
   }
-};
+}
 </script>
 <style scoped>
 .container {
